@@ -1,0 +1,50 @@
+<div class="container">
+
+<div class= "row">
+    <div class= "col">    
+        <h1 style="font-weight: bold;">Blog Post</h1>
+    </div>
+    
+</div>
+
+
+<% @blogs.each do |blog| %>
+
+    <div class="row m-3 shadow border bg-info">   
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 p-1 m-auto img-fluid">  
+            <%= link_to blog do %>
+                <%= image_tag blog.feature_image.variant(resize_to_fill:[500,500]), style:"max-width:100%"%>
+            <% end %>
+        </div> 
+
+        <div class="col my-auto d-flex flex-column py-1">
+            <div>
+                <h4 class="font-weight-bold"><%= blog.title %></h4>
+            </div>  
+            <div>
+                <% @user.each do |u| %>
+                    <% if blog.user_id == u.id %>
+                        <h5 class="font-weight-bold">Blogger: <%= u.full_name %></h5>
+                    <% end %>
+                <% end %>
+            </div>  
+            <div>
+                <%= simple_format(truncate(blog.description, length:280)) %>
+                <% if blog.description.length > 280 %>
+                    <%= link_to "(read more)", blog %>
+                <%end%>
+            </div> 
+            
+            <div class="align-self-end m-2">   
+            <%= link_to 'View Details', blog, class:"btn btn-info font-weight-bold"%>
+            </div>
+        </div>
+    </div> 
+<% end %>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+<div class="container">
+<h1 style="font-weight: bold;">Profile</h1>
+    <% @user.each do |user| %>
+        <div class="row border border-primary col-sm-8">
+            <div class="col-sm-4">
+                <div class="form-group row h-100 justify-content-center align-items-center">
+                    
+                        <% if user.avatar.attached? %> 
+                            <%= image_tag user.avatar.variant(resize: "150x150!"), class: "rounded-circle"%>
+                        <%else%>
+                            <%= image_tag "default_user.png", height: 150, width: 150, class: "rounded-circle" %>
+                        <%end%>
+                    
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-info font-weight-bold">Full Name</label>
+                    <div class="col-sm-6">
+                        <%= user.full_name %>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-info font-weight-bold">Email</label>
+                    <div class="col-sm-6">
+                        <%= user.email %>
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-info font-weight-bold"><%= link_to "Edit Account", edit_user_registration_path %></label>
+                    <div class="col-sm-6">
+                        <%= button_to "Delete Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "delacc" %>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    <%end%>
+</div>

@@ -1,0 +1,61 @@
+<body>
+    <div class="container">
+        <div class= "row my-4">
+            <div class= "col">    
+                <h1 style="font-weight: bold;">All MY BLOGS</h1>
+            </div>
+            <div class = "col-3 col-sm-2 col-md-2 col-lg2 mt-2 mr-2">
+                <%= link_to 'Upload New Blog', new_blog_path, class:"btn btn-info btn-md ", style:"hover:{color: white};font-size:18px;font-weight: bold; border-radius:5px" %>
+                <br>
+            </div>
+        </div>
+    
+    <% @blogs.each do |blog| %>
+        <div class="row m-3 shadow border bg-info">  
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 p-1 m-auto">  
+                <%= link_to blog do %>
+                    <%= image_tag blog.feature_image.variant(resize_to_fill:[500,500]), style:"max-width:100%"%> 
+                <% end %>
+            </div> 
+
+            <div class="col my-auto d-flex flex-column py-2">
+                <div>
+                    <h4 class="font-weight-bold"><%= blog.title %></h4>
+                </div>  
+                <div>
+                    <%= simple_format(truncate(blog.description, length:285)) %>
+                    <% if blog.description.length > 285 %>
+                        <%= link_to "(read more)", blog %>
+                    <%end%>
+                </div>
+
+                <div class="card-header">
+                    <div class ="row">
+                        <div class ="col-sm-2">
+                        </div>
+                        <!-- The like section start from here.-->
+                        <div class="col-sm-4">
+                            <p><%= blog.likes.count %> <%= (blog.likes.count) <= 1 ? 'Like' : 'Likes'%></p>
+                        </div>
+                    </div>
+                </div>
+                    <!-- end the like section.-->
+
+                <div class="align-self-end m-2">
+                    <%= link_to 'Show', blog, class:"btn btn-info font-weight-bold" ,style:"font-weight:bold;"%>
+                    <%= link_to 'Edit', edit_blog_path(blog), class:"btn btn-info font-weight-bold" %>
+                    <%= link_to 'Destroy', blog_path(blog), method: :delete, data: { confirm: 'Are you sure?' } , class:"btn btn-info font-weight-bold"%>
+                </div>
+            </div>
+        </div> 
+    <% end %>   
+    </div>
+</body>
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+<div class>
+    <%= form_for [commentable, Comment.new] do |form| %>
+        <div>
+            <div>
+                <%= form.text_area :body, class: "col-12 border rounded shadow", placeholder: " Add a comment", rows:"4",required: true %>
+            </div>
+        </div>
+        <%= form.submit 'Comment', class: "btn btn-primary"%>
+    <% end %>
+</div>

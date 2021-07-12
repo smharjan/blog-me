@@ -1,0 +1,17 @@
+<p class="text-sm text-secondary font-weight-bold text-uppercase">Comments</p>
+<% commentable.comments.each do |comment| %>
+    <div class = "mb-4">
+        <div class="p-4 leading-nomal border rounded shadow">
+            
+            <div>
+                <% if comment.user.avatar.attached?%>
+                    <%= image_tag comment.user.avatar.variant(resize_to_fill: [25, 25]), class:"rounded-circle"%>
+                <% else %>
+                    <%= image_tag "default_user.png", width: 25, class: "rounded-circle"%>
+                <% end%>
+                <strong><%= comment.user.full_name || comment.user.email %></strong>:
+            </div>
+            <%= comment.body %>
+        </div>
+    </div>
+<% end %>
